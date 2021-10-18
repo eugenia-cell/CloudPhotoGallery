@@ -5,9 +5,11 @@ from django.views.generic import TemplateView
 from mygallery.views import photo, album
 
 urlpatterns = [
+    path('album/webindex', album.webindex, name="mygallery_album_webindex"),
+    path('album/oss_home', album.oss_home, name="mygallery_album_oss_home"),
+
     # path('', album.index, name="mygallery_index"),
     path('photo/webindex', photo.webindex, name="mygallery_photo_webindex"),
-    path('album/webindex', album.webindex, name="mygallery_album_webindex"),
     path('photo/oss_home', photo.oss_home, name="mygallery_photo_oss_home"),
     path('photo/endless_home', TemplateView.as_view(template_name='photo/endless_list.html'),
         name='endless_home')
