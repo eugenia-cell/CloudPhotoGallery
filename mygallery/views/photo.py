@@ -6,10 +6,10 @@ from django.shortcuts import render
 from mygallery.models import photo, album
 
 
-def webindex(request):
+def webindex(request,Aid):
     '''首页 '''
-    paged_photos = photo.objects.all()
-    albumlist = album.objects.all()
+    paged_photos = photo.objects.filter(Album_id=Aid)
+    albumlist = album.objects.filter(id=Aid)
     paginator = Paginator(paged_photos, 5)
     page_number = request.GET.get('page')
     photolist= paginator.get_page(page_number)

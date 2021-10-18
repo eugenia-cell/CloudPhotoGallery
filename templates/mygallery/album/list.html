@@ -3,98 +3,46 @@
 {% block title %}首页{% endblock title %}
 
 {% block content %}
+
     <div class="container py-2">
         <div class="row" data-masonry='{"percentPosition": true}' id="cards">
-            {% for photo in photolist %}
+             {% for album in albumlist %}
             <div class="col-4 py-2 grid-item">
                 <div class="card hvr-float-shadow">
-                    <a
-                    href="#"
-                    data-bs-toggle="modal"
-                    data-bs-target="#photo-{{ photo.id }}"
-                    >
+                    <div style="padding:10px 0 1px 0;background: #f0ad4e;">
+                        <h6 style="text-align:center">{{ album.Album_name }}</h6>
+                    </div>
+                    <a href="../photo/webindex/{{ album.id }}">
                         <img
-                        src="{% static 'pics/' %}{{photo.Photo_link}}"
+                        src="{% static 'pics/' %}{{ album.cover }}"
                         alt=""
                         class="card-img"
                         >
                     </a>
                 </div>
             </div>
-            {% endfor %}
+             {% endfor %}
         </div>
 
-        <div class="row justify-content-center py-5">
-            <span class="step-links paginator">
-                {% if photolist.has_previous %}
-                    <a
-                    href="?page=1"
-                    class="paginator prevnext" >
-                        &laquo;
-                    </a>
-                    <a
-                    href="?page={{ photos.previous_page_number }}"
-                    class="paginator prevnext">
-                        {{ photolist.previous_page_number }}
-                    </a>
-                {% endif %}
-
-                    <span class="current">
-                        {{ photolist.number }}
-                    </span>
-
-                {% if photolist.has_next %}
-                    <a
-                    href="?page={{ photos.next_page_number }}"
-                    class="paginator prevnext">
-                        {{ photolist.next_page_number }}
-                    </a>
-                    <a
-                    href="?page={{ photos.paginator.num_pages }}"
-                    class="paginator prevnext">
-                        &raquo;
-                    </a>
-                {% endif %}
-            </span>
-        </div>
-    </div>
-
-    {% for photo in photolist  %}
-    <!-- Modal -->
-    <div class="modal fade" id="photo-{{ photo.id }}">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img
-                    src="{% static 'pics/' %}{{photo.Photo_link}}"
-                    alt=""
-                    class="card-img"
-                    >
+     <!-- Modal -->
+    {% for album in albumlist  %}
+        <div class="modal fade" id="album-{{ album.id }}">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                            <img
+                            src="{% static 'pics/' %}{{album.cover}}"
+                            alt=""
+                            class="card-img"
+                            >
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endfor %}
 {% endblock content %}
 
 {% block scripts %}
-<style>
-    .paginator {
-        color: white;
-        text-align: center;
-        text-decoration: none;
-    }
-    .prevnext {
-        font-size: x-large;
-    }
-    .current {
-        font-size: xx-large;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    
-</style>
 
 <script type='text/javascript'>
     $(window).on('load', function() {

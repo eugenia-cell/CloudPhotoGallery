@@ -17,6 +17,6 @@ from django.urls import path, include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('', include('mygallery.urls')), #默认访问云相册
+    path('mygallery/', include('mygallery.urls')), #默认访问云相册
     path('myadmin/', include('myadmin.urls')), #后台管理
 ]

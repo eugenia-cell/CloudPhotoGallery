@@ -8,11 +8,7 @@ from mygallery.models import photo, album
 def webindex(request):
     '''首页 '''
     paged_albums = album.objects.all()
-    photolist = photo.objects.all()
-    paginator = Paginator(paged_albums, 5)
-    page_number = request.GET.get('page')
-    albumlist= paginator.get_page(page_number)
-    context = {'albumlist': albumlist, 'photolist': photolist}
+    context = {'albumlist': paged_albums}
     return render(request, "mygallery/album/list.html", context)
 
 def oss_home(request):

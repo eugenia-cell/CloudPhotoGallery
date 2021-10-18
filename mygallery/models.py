@@ -1,5 +1,4 @@
 # Create your models here.
-# Create your models here.
 from datetime import datetime
 
 from django.db import models
@@ -38,6 +37,7 @@ class album(models.Model):
     Album_addtime = models.DateTimeField(default=datetime.now)
     Album_password = models.CharField(max_length=50)
     photo_count = models.IntegerField(default=0)
+    cover = models.CharField(max_length=50)
 
     class Meta:
         db_table = "album"  # 更改表名
