@@ -1,7 +1,5 @@
-from datetime import datetime
-
 from django.db import models
-
+from datetime import datetime
 
 #用户账号信息模型
 class user(models.Model):
@@ -19,7 +17,7 @@ class user(models.Model):
     photo_count = models.IntegerField(default=0)  # 相片数量
 
     def toDict(self):
-        return {'id':self.id,'User_name':self.User_name,'User_password':self.User_password,'User_email':self.User_email,'User_phone':self.User_phone,'User_gender':self.User_gender,'date_joined':self.date_joined,'User_status':self.User_status,'User_check':self.User_check,'album_count':self.album_count,'photo_count':self.photo_count}
+        return {'id':self.id,'User_name':self.User_name,'User_password':self.User_password,'User_email':self.User_email,'User_phone':self.User_phone,'User_gender':self.User_gender,'date_joined':self.date_joined.strftime('%Y-%m-%d %H:%M:%S'),'User_status':self.User_status,'User_check':self.User_check,'album_count':self.album_count,'photo_count':self.photo_count}
 
     class Meta:
         db_table = "user"  # 更改表名

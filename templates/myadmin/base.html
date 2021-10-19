@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>云相册系统后台管理</title>
+  <title>云相册后台管理系统</title>
   <!-- 支持响应式布局 -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{% static 'myadmin/bower_components/bootstrap/dist/css/bootstrap.min.css'%}">
@@ -31,11 +31,15 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{% url 'myadmin_index' %}" class="logo">
       <!-- 侧栏迷你徽标 mini 50x50 pixels -->
-      <span class="logo-mini"><b>云</b></span>
+      <span class="logo-mini">
+        <img src="{% static 'elements/cloud.png' %}" width="30" height="30">
+      </span>
       <!-- 常规状态标志和移动设备标志 -->
-      <span class="logo-lg"><b>云相册系统后台管理</b></span>
+      <span class="logo-lg">
+        <img src="{% static 'elements/title.png' %}">
+      </span>
     </a>
 
     <!-- Header Navbar 首部导航栏 -->
@@ -150,7 +154,7 @@
               <!-- The user image in the navbar-->
               <img src="{% static 'myadmin/dist/img/user2-160x160.jpg'%}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">张无忌</span>
+              <span class="hidden-xs">{{request.session.adminuser.User_name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -158,8 +162,8 @@
                 <img src="{% static 'myadmin/dist/img/user2-160x160.jpg'%}" class="img-circle" alt="User Image">
 
                 <p>
-                  张无忌 - 管理员
-                  <small>2020年07月16日加入</small>
+                  {{request.session.adminuser.User_name}} - 管理员
+                  <small>{{request.session.adminuser.date_joined}}加入</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -168,7 +172,7 @@
                   <a href="#" class="btn btn-default btn-flat">个人信息</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">退 出</a>
+                  <a href="{% url 'myadmin_logout' %}" class="btn btn-default btn-flat">退 出</a>
                 </div>
               </li>
             </ul>
@@ -191,7 +195,7 @@
           <img src="{% static 'myadmin/dist/img/user2-160x160.jpg'%}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>张无忌 . 管理员</p>
+          <p>{{request.session.adminuser.User_name}} . 管理员</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
         </div>
@@ -201,27 +205,8 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">主要导航</li>
         <!-- 导航列表，你可以自行更改图标 -->
-        <li class="active"><a href="{% url 'myadmin_index' %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
-
-        <li><a href="{% url 'myadmin_user_index' 1 %}"><i class="fa fa-users"></i> <span>用户信息管理</span></a></li>
-        <li><a href="shop.html"><i class="fa fa-sitemap"></i> <span>店铺管理</span></a></li>
-        <li class="treeview">
-          <a href="category.html"><i class="fa fa-cutlery"></i> <span>菜品管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="category.html"> <i class="fa fa-circle-o"></i> 菜品分类</a></li>
-            <li><a href="product.html"> <i class="fa fa-circle-o"></i> 菜品信息</a></li>
-          </ul>
-        </li>
-        <li><a href="orders.html"><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a></li>
-        <li><a href="#"><i class="fa fa-user"></i> <span>账号管理</span></a></li>
-        <li><a href="#"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
-        <li><a href="#"><i class="fa fa-gear"></i> <span>系统配置</span></a></li>
-        <li><a href="#"><i class="fa fa-unlock-alt"></i> <span>认证体系</span></a></li>
-      </ul>
+        {% block sidebar %}
+        {% endblock %}
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -241,7 +226,7 @@
       <!--餐饮管理平台-->
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="#">北京****有限公司</a>.</strong> 版权所有
+    <strong>Copyright &copy; 2021 <a href="#">北京****有限公司</a>.</strong> 版权所有
   </footer>
 
   <!-- 添加侧栏的背景。必须放置此处紧接在控制侧边栏之后 -->
@@ -283,7 +268,8 @@
 <!-- 此处可以添加SimLoopl和FastClick插件，用于增强用户体验。 -->
 
 <script type="text/javascript">
-	/*
+
+function doDel(url){
     Modal.confirm({
         msg: "确定要删除吗？",
         title: ' 信息提示',
@@ -291,10 +277,12 @@
         btncl:'取消'
       }).on(function (e){
         if(e){
-          Modal.alert({msg: "成功删除",title: ' 信息提示',btnok: '确定',btncl:'取消'});
+        window.location.href=url;
+          //Modal.alert({msg: "成功删除",title: ' 信息提示',btnok: '确定',btncl:'取消'});
         }
       });
-      */
+    }
+
 </script>
 </body>
 </html>

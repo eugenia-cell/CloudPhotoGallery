@@ -52,14 +52,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{checkcount}}</h3>
 
-              <p>用户注册</p>
+              <p>注册审核</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{% url 'myadmin_user_index' 1 %}?User_check=0" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -82,4 +82,27 @@
 
     </section>
     <!-- /.content -->
+{% endblock %}
+
+{% block sidebar %}
+        <li class="active"><a href="{% url 'myadmin_index' %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+        <li><a href="{% url 'myadmin_user_index' 1 %}"><i class="fa fa-users"></i> <span>用户信息管理</span></a></li>
+        <li><a href="shop.html"><i class="fa fa-sitemap"></i> <span>店铺管理</span></a></li>
+        <li class="treeview">
+          <a href="category.html"><i class="fa fa-cutlery"></i> <span>菜品管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="category.html"> <i class="fa fa-circle-o"></i> 菜品分类</a></li>
+            <li><a href="product.html"> <i class="fa fa-circle-o"></i> 菜品信息</a></li>
+          </ul>
+        </li>
+        <li><a href="orders.html"><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a></li>
+        <li><a href="#"><i class="fa fa-user"></i> <span>账号管理</span></a></li>
+        <li><a href="#"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
+        <li><a href="#"><i class="fa fa-gear"></i> <span>系统配置</span></a></li>
+        <li><a href="#"><i class="fa fa-unlock-alt"></i> <span>认证体系</span></a></li>
 {% endblock %}

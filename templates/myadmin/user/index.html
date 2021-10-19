@@ -97,15 +97,15 @@
                   </td>
                   <td>
                     {% if vo.User_status == 0 %}
-                        <button type="button" class="btn btn-success btn-xs">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</button>
-                        <button type="button" class="btn btn-danger btn-xs">
+                        <a type="button" href="{% url 'myadmin_user_edit' vo.id %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</a>
+                        <button type="button" onclick="doDel('{% url 'myadmin_user_delete' vo.id%}')" class="btn btn-danger btn-xs">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除</button>
                         <button type="button" class="btn btn-warning btn-xs">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查看相册</button>
                     {% elif vo.User_status == 1 %}
-                         <button type="button" class="btn btn-primary btn-xs">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑管理员信息</button>
+                         <a type="button" href="{% url 'myadmin_user_edit' vo.id %}" class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑管理员信息</a>
                     {% endif %}
                   </td>
                 </tr>
@@ -114,8 +114,10 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a role="button" href="add.html" class="btn btn-primary">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加店铺</a>
+              <a role="button" href="{% url 'myadmin_user_add' %}" class="btn btn-primary">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加用户</a>
+              <a role="button" href="{% url 'myadmin_user_index' 1 %}?User_check=0" class="btn btn-warning">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查看待审核用户</a>
               <ul class="pagination pagination-sm no-margin pull-right">
                 <li><a href="{% url 'myadmin_user_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
                   {% for p in plist %}
@@ -131,4 +133,27 @@
 
     </section>
     <!-- /.content -->
+{% endblock %}
+
+{% block sidebar %}
+        <li><a href="{% url 'myadmin_index' %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+        <li class="active"><a href="{% url 'myadmin_user_index' 1 %}"><i class="fa fa-users"></i> <span>用户信息管理</span></a></li>
+        <li><a href="shop.html"><i class="fa fa-sitemap"></i> <span>店铺管理</span></a></li>
+        <li class="treeview">
+          <a href="category.html"><i class="fa fa-cutlery"></i> <span>菜品管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="category.html"> <i class="fa fa-circle-o"></i> 菜品分类</a></li>
+            <li><a href="product.html"> <i class="fa fa-circle-o"></i> 菜品信息</a></li>
+          </ul>
+        </li>
+        <li><a href="orders.html"><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a></li>
+        <li><a href="#"><i class="fa fa-user"></i> <span>账号管理</span></a></li>
+        <li><a href="#"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
+        <li><a href="#"><i class="fa fa-gear"></i> <span>系统配置</span></a></li>
+        <li><a href="#"><i class="fa fa-unlock-alt"></i> <span>认证体系</span></a></li>
 {% endblock %}
