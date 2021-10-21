@@ -48,19 +48,35 @@ def add(request):
 def insert(request):
     '''执行信息添加'''
     try:
-        ob = user();
-        ob.User_name = request.POST['User_name']
-        ob.User_password = request.POST['User_password']
-        ob.User_email = request.POST['User_email']
-        ob.User_phone = request.POST['User_phone']
-        ob.User_gender = request.POST['User_gender']
-        ob.date_joined = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        ob.User_status = 0
-        ob.User_check = 0
-        ob.album_count = 0
-        ob.photo_count = 0
-        ob.save()
-        context = {'info':"添加成功"}
+        ob = user()
+        if request.POST['User_name'] == '' or request.POST['User_password'] == '':
+            context = {'info': '用户名或密码不得为空！'}
+        else:
+            inuser = user.objects.filter(User_name=request.POST['User_name'])
+            if inuser:
+                context = {'info': '用户名已存在！'}
+            else:
+                ob.User_name = request.POST['User_name']
+                ob.User_password = request.POST['User_password']
+                if request.POST['User_email'] == '':
+                    ob.User_email = None
+                else:
+                    ob.User_email = request.POST['User_email']
+                if request.POST['User_phone'] == '':
+                    ob.User_phone = None
+                else:
+                    ob.User_phone = request.POST['User_phone']
+                if request.POST['User_gender'] == '':
+                    ob.User_gender = None
+                else:
+                    ob.User_gender = request.POST['User_gender']
+                ob.date_joined = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                ob.User_status = 0
+                ob.User_check = 0
+                ob.album_count = 0
+                ob.photo_count = 0
+                ob.save()
+                context = {'info':"添加成功"}
     except Exception as err:
         print(err)
         context = {'info': "添加失败"}
@@ -92,9 +108,18 @@ def update(request,uid=0):
     '''执行信息编辑'''
     try:
         ob = user.objects.get(id=uid)
-        ob.User_email = request.POST['User_email']
-        ob.User_phone = request.POST['User_phone']
-        ob.User_gender = request.POST['User_gender']
+        if request.POST['User_email'] == '':
+            ob.User_email = None
+        else:
+            ob.User_email = request.POST['User_email']
+        if request.POST['User_phone'] == '':
+            ob.User_phone = None
+        else:
+            ob.User_phone = request.POST['User_phone']
+        if request.POST['User_gender'] == '':
+            ob.User_gender = None
+        else:
+            ob.User_gender = request.POST['User_gender']
         ob.User_check = request.POST['User_check']
         ob.save()
         context = {'info': "修改成功"}

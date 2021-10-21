@@ -22,6 +22,14 @@ class PhotoMiddleware(object):
                 #重定向到登录页
                 return redirect(reverse("myadmin_login"))
 
+        #判断云相册用户端是否登录（session是否有galleryuser）
+        if re.match(r'^/mygallery',path):
+            #判断是否登录（在session中没有galleryuser）
+            if 'galleryuser' not in request.session:
+                #重定向到登录页
+                return redirect(reverse("mygallery_login"))
+
+
         # 请求继续执行下去
         response = self.get_response(request)
         return response

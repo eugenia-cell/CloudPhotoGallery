@@ -1,0 +1,138 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!-- Title -->
+        <title>云相册 - 账号注册</title>
+
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+        <link href="{% static 'mygallery/login_register/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'mygallery/login_register/assets/plugins/font-awesome/css/all.min.css' %}" rel="stylesheet">
+        <link href="{% static 'mygallery/login_register/assets/plugins/perfectscroll/perfect-scrollbar.css' %}" rel="stylesheet">
+        <link href="{% static 'mygallery/login_register/assets/plugins/pace/pace.css' %}" rel="stylesheet">
+
+
+        <!-- Theme Styles -->
+        <link href="{% static 'mygallery/login_register/assets/css/main.min.css' %}" rel="stylesheet">
+        <link href="{% static 'mygallery/login_register/assets/css/custom.css' %}" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="login-page">
+
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-12 col-lg-4">
+                    <div class="card login-box-container">
+                        <div class="card-body">
+                            <div class="authent-logo">
+                                <a href="{% url 'mygallery_register' %}">- 云相册 -</a>
+                            </div>
+                            <div class="authent-text">
+                                <p> Welcome to Cloud Photo Gallery </p>
+                                <p> 请填写基本信息 </p>
+                            </div>
+                            <form class="form-horizontal" action="{% url 'mygallery_doregister' %}" method="post">
+                            {% csrf_token %}
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <div class="col-8">
+                                            <div class="form-floating">
+                                                <input type="text" autocomplete="off" name="User_name" class="form-control" placeholder="User_name">
+                                                <label>用户名</label>
+                                              </div>
+                                        </div>
+                                        &nbsp
+                                        <div class="col">
+                                            <select name="User_gender" class="form-select">
+                                                <option selected value="">gender...</option>
+                                                <option value="男">男</option>
+                                                <option value="女">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <div class="col">
+                                             <div class="form-floating">
+                                                <input type="password" autocomplete="off" name="User_password" class="form-control" placeholder="Password">
+                                                <label>密码</label>
+                                            </div>
+                                        </div>
+                                        &nbsp
+                                        <div class="col">
+                                             <div class="form-floating">
+                                                <input type="password" autocomplete="off" name="Confirm_password" class="form-control" placeholder="Confirm Password">
+                                                <label>确认密码</label>
+                                            </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <div class="col-7">
+                                            <div class="form-floating">
+                                                <input type="email" autocomplete="off" name="User_email" class="form-control" placeholder="name@example.com">
+                                                <label>邮箱地址（选填）</label>
+                                            </div>
+                                        </div>
+                                        &nbsp
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input type="tel" autocomplete="off" name="User_phone" class="form-control" placeholder="phone">
+                                                <label>联系方式（选填）</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                  <input type="hidden" name="allow" value="false">
+                                  <input type="checkbox" name="allow" value="true" class="form-check-input">
+                                  <label class="form-check-label">我已阅读并同意 <a href="#">用户协议和隐私政策</a></label>
+                                </div>
+
+                                <div class="authent-text">
+                                    <p><span class="text-secondary">{{ info }}</span></p>
+                                </div>
+                                <div class="d-grid">
+                                <button type="submit" class="btn btn-primary m-b-xs">注册</button>
+                            </div>
+                              </form>
+                              <div class="authent-login">
+                                  <p>已经有一个账号？ <a href="{% url 'mygallery_login' %}">登录</a></p>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Javascripts -->
+        <script src="{% static 'mygallery/login_register/assets/plugins/jquery/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'mygallery/login_register/https://unpkg.com/@popperjs/core@2' %}"></script>
+        <script src="{% static 'mygallery/login_register/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script src="{% static 'mygallery/login_register/assets/plugins/perfectscroll/perfect-scrollbar.min.js' %}"></script>
+        <script src="{% static 'mygallery/login_register/assets/plugins/pace/pace.min.js' %}"></script>
+        <script src="{% static 'mygallery/login_register/assets/js/main.min.js' %}"></script>
+    </body>
+</html>

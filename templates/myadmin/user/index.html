@@ -69,31 +69,21 @@
                     {% endif %}
                   </td>
                   <td>
-                    {% if vo.User_status == 0 %}
-                        {% if vo.User_check == 0 %}
+
+                      {% if vo.User_check == 0 %}
                             <span class="label label-warning">审核中</span>
-                        {% elif vo.User_check == 1 %}
+                      {% elif vo.User_check == 1 %}
                             <span class="label label-success">已通过</span>
-                        {% else %}
+                      {% else %}
                             <span class="label label-danger">异常</span>
-                        {% endif %}
-                    {% elif vo.User_status == 1 %}
-                        -
-                    {% endif %}
+                      {% endif %}
+
                   </td>
                   <td>
-                    {% if vo.User_status == 0 %}
                         {{ vo.album_count }}
-                    {% elif vo.User_status == 1 %}
-                        -
-                    {% endif %}
                   </td>
                   <td>
-                    {% if vo.User_status == 0 %}
                         {{ vo.photo_count }}
-                    {% elif vo.User_status == 1 %}
-                        -
-                    {% endif %}
                   </td>
                   <td>
                     {% if vo.User_status == 0 %}

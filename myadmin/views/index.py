@@ -40,10 +40,10 @@ def dologin(request):
             else:
                 context = {"info":"密码错误！"}
         else:
-            context = {"info":"无效的登录账号！"}
+            context = {"info":"该账号没有管理员权限！"}
     except Exception as err:
         print(err)
-        context = {"info":"登陆账号不存在！"}
+        context = {"info":"该账号不存在！"}
     return render(request,"myadmin/index/login.html",context)
 
 #管理员退出登录

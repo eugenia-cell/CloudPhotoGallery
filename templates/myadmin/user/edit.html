@@ -37,17 +37,17 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">性别：</label>
                   <div class="col-sm-4">
-                        <input type="radio" name="User_gender" value="男"
-                        {% if user.User_gender == "男" %}checked{% endif %}/>   男&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <input type="radio" name="User_gender" value="女"
-                        {% if user.User_gender == "女" %}checked{% endif %}/>   女
-
+                        <select name="User_gender" class="form-select col-lg-2">
+                        <option selected value="">...</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">邮箱：</label>
                   <div class="col-sm-4">
-                    <input type="email" name="User_email" value="{{user.User_email}}" class="form-control" >
+                    <input type="text" name="User_email" value="{{user.User_email}}" class="form-control" >
                   </div>
                 </div>
                 <div class="form-group">
