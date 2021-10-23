@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -49,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'myadmin.middleware.PhotoMiddleware',  #注册自定义的中间件
 ]
 
 ROOT_URLCONF = 'CloudPhotoGallery.urls'
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'CloudPhotoGallery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'photogallery',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'photogallary',
+        'PASSWORD': 'wang22748',
+        'HOST':'192.168.1.102',
+        'USER': 'QS', 
         'PORT': '3306',
     }
 }
@@ -117,7 +118,6 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_L10N = True
-
 USE_TZ = False
 
 
@@ -128,3 +128,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# 指定媒体文件路径
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = str.format(BASE_DIR, '/media/')    # os.path.join(BASE_DIR, 'media')
+
+#MEDIA_ROOT =str.format(BASE_DIR, '/media/') #BASE_DIR / 'static' 
