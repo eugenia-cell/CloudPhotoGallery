@@ -6,7 +6,8 @@ from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
 
 
-from myadmin.models import user
+from mygallery.models import user
+from mygallery.models import photo,album
 
 # Create your views here.
 
@@ -35,12 +36,31 @@ def dologin(request):
                     return render(request, "mygallery/index/login.html", context)
                 else:
                     print("登录成功")
-                    context = {'userid':use.id}
                     #将当前登录成功的用户信息以galleryuser为key写入到session中
                     request.session['galleryuser']=use.toDict()
-                    #重定向到后台管理首页
-                    return render(request, "mygallery/album/list.html",context)
-                    # return redirect(reverse("mygallery_album_webindex"))
+                    #获取当前用户信息
+                    userob = user.objects.get(User_name=request.POST['User_name'])
+                    request.session['userinfo'] = userob.toDict()
+                    #获取登录用户对应的相册信息和相片信息
+                    alist = album.objects.filter(Owner_id=userob.id)
+                    albumlist = dict()  #登录用户对应的相册（内含相片信息）
+                    photolist = dict()  #相片信息
+                    #遍历登录用户对应的相册信息
+                    for vo in alist:
+                        a = {'id':vo.id,'Album_name':vo.Album_name,'Album_description':vo.Album_description,'Album_addtime':vo.Album_addtime.strftime('%Y-%m-%d %H:%M:%S'),
+                             'Album_password':vo.Album_password,'Album_visible':vo.Album_visible,'photo_count':vo.photo_count,'cover':vo.cover,'aids':[]}
+                        plist = photo.objects.filter(Album_id=vo.id)
+                        #遍历当前相册中所有相片信息
+                        for p in plist:
+                            a['aids'].append(p.toDict())
+                            photolist[p.id]=p.toDict()
+                        albumlist[vo.id] = a
+                    #将以上结果存入session中
+                    request.session['albumlist'] = albumlist
+                    request.session['photolist'] = photolist
+
+                    #重定向到云相册首页
+                    return redirect(reverse("mygallery_album_webindex"))
             else:
                 context = {"info":"密码错误！"}
         else:

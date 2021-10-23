@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from myadmin.models import user
+from mygallery.models import user
 from django.shortcuts import redirect
 from django.urls import reverse
 from PIL import Image, ImageDraw, ImageFont

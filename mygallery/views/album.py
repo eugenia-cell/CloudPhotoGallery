@@ -8,7 +8,7 @@ from mygallery.models import photo, album
 def webindex(request):
     '''首页 '''
     paged_albums = album.objects.all()
-    context = {'albumlist': paged_albums}
+    context = {'albumlist': request.session.get("albumlist",{}).items()}
     return render(request, "mygallery/album/list.html", context)
 
 def oss_home(request):

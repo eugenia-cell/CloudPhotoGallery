@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'CloudPhotoGallery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'photogallary',
+        'NAME': 'photogallery',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

@@ -4,7 +4,7 @@ import random
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
-from myadmin.models import user
+from mygallery.models import user
 from django.db.models import Q
 from datetime import datetime
 
