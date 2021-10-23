@@ -14,7 +14,7 @@
                     data-bs-target="#photo-{{ photo.id }}"
                     >
                         <img
-                        src="{% static 'pics/' %}{{photo.Photo_link}}"
+                        src="{{photo.Photo_link.url}}"
                         alt=""
                         class="card-img"
                         >
@@ -33,7 +33,7 @@
                         &laquo;
                     </a>
                     <a
-                    href="?page={{ photos.previous_page_number }}"
+                    href="?page={{ photolist.previous_page_number }}"
                     class="paginator prevnext">
                         {{ photolist.previous_page_number }}
                     </a>
@@ -45,12 +45,12 @@
 
                 {% if photolist.has_next %}
                     <a
-                    href="?page={{ photos.next_page_number }}"
+                    href="?page={{ photolist.next_page_number }}"
                     class="paginator prevnext">
                         {{ photolist.next_page_number }}
                     </a>
                     <a
-                    href="?page={{ photos.paginator.num_pages }}"
+                    href="?page={{ photolist.paginator.num_pages }}"
                     class="paginator prevnext">
                         &raquo;
                     </a>
@@ -66,7 +66,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <img
-                    src="{% static 'pics/' %}{{photo.Photo_link}}"
+                    src="{{photo.Photo_link.url}}"
                     alt=""
                     class="card-img"
                     >
