@@ -17,9 +17,11 @@ a.btn{
 <footer class="py-3 bg-dark fixed-bottom">
         <div class="gcs-footer">
             <div class="text-center">
+                {% for album in albumlist %}
                     <a href="#" class="btn">编辑相册</a>|
-                    <a  href="#" class="btn" >添加照片</a>
+                    <a  href="../upload/{{ album.id }}" class="btn" >添加照片</a>
                     <a href="#" class="btn">删除照片</a>
+                {% endfor %}
             </div>
             <p class="m-0 text-center text-white">
             Copyright &copy; 电子科技大学软件工程12小组
