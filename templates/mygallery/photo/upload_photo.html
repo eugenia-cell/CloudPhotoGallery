@@ -1,0 +1,122 @@
+{% load static from staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>upload_photo</title>
+
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="/static/mygallery/photo/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/mygallery/photo/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+        <link href="/static/mygallery/photo/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+        <link href="/static/mygallery/photo/assets/plugins/pace/pace.css" rel="stylesheet">
+
+      
+        <!-- Theme Styles -->
+        <link href="/static/mygallery/photo/assets/css/main.min.css" rel="stylesheet">
+        <link href="/static/mygallery/photo/assets/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <body class="page-sidebar-collapsed">
+        <div class="page-container">
+          <div class="page-sidebar">
+            <ul class="list-unstyled accordion-menu">
+            </ul>
+            <a href="#" id="sidebar-collapsed-toggle"><i data-feather="arrow-right"></i></a>
+          </div>
+            <div class="page-content">
+              <div class="page-header">
+                <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+                  <div class="header-title flex-fill">
+                    <h2>图片上传</h5>
+                <div class="main-wrapper">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+
+                                  <form method="post" action="{% url 'mygallery_photo_doupload' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <h5 class="card-title">相片命名</h5>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="photo_name" >
+                                        <label for="floatingInput">photo name</label>
+                                      <p> </p>
+
+                                    <h5 class="card-title">图片类别选择</h5>
+                                    <p class="card-description">请选择您的图片 <code>&lt;风格&gt;</code> 
+                                    <select name="photo_category" class="form-select" aria-label="Default select example">
+                                        <option value="0">Open this select menu</option>
+                                            <option value="1">Animal</option>
+                                            <option value="2">Family</option>
+                                            <option value="3">Food</option>
+                                            <option value="4">Idol</option>
+                                            <option value="5">Scenery</option>
+                                      </select>
+                                      <p> </p>
+
+                                    <h5 class="card-title">图片选择</h5>
+                                      <div class="mb-3">
+                                        <label for="formFileMultiple" class="form-label"></label>
+                                        <input class="form-control" type="file"  name="photo_choosen" multiple="multiple">
+                                      </div>
+                                      <p> </p>
+
+                                    <h5 class="card-title">设置照片可见性</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="1">
+                                          public
+                                        
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="0" checked>
+                                          private
+      
+                                      </div>
+                                      <p> </p>
+
+                                    <h5 class="card-title">照片描述</h5>
+                                      <div class="input-group">
+                                        <span class="input-group-text">With textarea</span>
+                                        <textarea class="form-control" name="photo_description" aria-label="With textarea"></textarea>
+                                      </div>
+                                      <p> </p>
+                                      
+                                      <button type="submit" class="btn btn-primary">提交</button>
+                                  
+                                  </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                  
+              </div> 
+            </div>
+            </div>
+          </div>
+      </div>
+        <!-- Javascripts -->
+        <script src="/static/mygallery/photo/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="/static/mygallery/photo/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script src="/static/mygallery/photo/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+        <script src="/static/mygallery/photo/assets/plugins/pace/pace.min.js"></script>
+        <script src="/static/mygallery/photo/assets/js/main.min.js"></script>
+    </body>
+</html>
