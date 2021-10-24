@@ -12,7 +12,7 @@ class album(models.Model):
     Album_password = models.CharField(db_column='Album_password', max_length=50, blank=True, null=True)  # Field name made lowercase.
     Album_visible = models.IntegerField(db_column='Album_visible', default=0)  # Field name made lowercase.
     photo_count = models.IntegerField(db_column='photo_count', default=0)
-    cover = models.CharField(db_column='cover',max_length=50, default='cover.jpg')
+    cover = models.ImageField(upload_to='media\cover')
 
     def toDict(self):
         return {'id':self.id,'Album_name':self.Album_name,'Album_description':self.Album_description,
@@ -67,7 +67,7 @@ class photo(models.Model):
     Photo_addtime = models.DateTimeField(db_column='Photo_addtime', blank=True, null=True,default=datetime.now)  # Field name made lowercase.
     Photo_height = models.FloatField(db_column='Photo_height', blank=True, null=True)  # Field name made lowercase.
     Photo_width = models.FloatField(db_column='Photo_width', blank=True, null=True)  # Field name made lowercase.
-    Photo_link = models.CharField(db_column='Photo_link', max_length=100)  # Field name made lowercase.
+    Photo_link = models.ImageField(upload_to='media\photo')
     thumb_count = models.IntegerField(db_column='thumb_count', default=0)
     Photo_visible = models.IntegerField(db_column='Photo_visible', default=0)  # Field name made lowercase.
 
