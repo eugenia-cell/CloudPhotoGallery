@@ -25,11 +25,13 @@ urlpatterns = [
         path('photo/oss_home', photo.oss_home, name="mygallery_photo_oss_home"),
         path('photo/endless_home', TemplateView.as_view(template_name='photo/endless_list.html'),
             name='endless_home'),
-
+        path('photo/upload/<int:bid>', photo.upload,name="mygallery_photo_upload"),
+        path('photo/doupload/', photo.doupload,name="mygallery_photo_doupload"),
         #path('photo/insert', photo.insert, name="mygallery_photo_insert"),
         #path('photo/delete/<int:uid>', photo.delete, name="mygallery_photo_delete"),  # 执行删除
         #path('photo/edit/<int:uid>', photo.edit, name="mygallery_photo_edit"),  # 编辑表单
         #path('photo/update/<int:uid>', photo.update, name="mygallery_photo_update"),  # 执行编辑
+
 
     ]))
 ]
